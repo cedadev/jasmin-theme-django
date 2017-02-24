@@ -160,6 +160,39 @@
 
         {% block footer_js %}
         <script src="{% static "jasmin_theme/js/invalid_controls.js" %}"></script>
+        <script>!function(e,o,n){window.HSCW=o,window.HS=n,n.beacon=n.beacon||{};var t=n.beacon;t.userConfig={},t.readyQueue=[],t.config=function(e){this.userConfig=e},t.ready=function(e){this.readyQueue.push(e)},o.config={docs:{enabled:!0,baseUrl:"//jasmin-help.helpscoutdocs.com/"},contact:{enabled:!0,formId:"71e2f368-bd39-11e6-91aa-0a5fecc78a4d"}};var r=e.getElementsByTagName("script")[0],c=e.createElement("script");c.type="text/javascript",c.async=!0,c.src="https://djtflbt20bdde.cloudfront.net/",r.parentNode.insertBefore(c,r)}(document,window.HSCW||{},window.HS||{});</script>
+        <script>
+            HS.beacon.config({
+                color: '#ff6600',
+                topArticles: true,
+                icon: 'question',
+                translation: {
+                    searchLabel: 'Search JASMIN documentation',
+                    searchErrorLabel: 'There was a problem searching the Help pages. Visit: help.ceda.ac.uk or email support@ceda.ac.uk'
+                },
+                topics: [
+                    { val: 'jasmin-help', label: 'Help with JASMIN/CEMS'},
+                    { val: 'account-problem', label: 'Help with my account'},
+                    { val: 'bug-flag', label: 'Found a bug?'},
+                    { val: 'content-flag', label: 'Content on this page looks wrong'}
+                ],
+                attachment: true,
+                instructions:'Drop CEDA Support a message below and we\'ll try to help.'
+            });
+            HS.beacon.ready(function() {
+                {% block hs_beacon_suggestions %}
+                HS.beacon.suggest([]);
+                {% endblock %}
+                // If the user doesn't have the cookie, pop ourselves up, but set the cookie
+                if( document.cookie.match(/^(.*; ?)?hs_beacon_shown=[^;]+/) === null ) {
+                    // Open the Beacon as soon as it's ready
+                    this.open();
+                    setTimeout(this.close, 3000);
+                    // Set cookie that expires at end of session
+                    document.cookie = "hs_beacon_shown=1; expires=; path=/; ";
+                }
+            });
+        </script>
         {% block footer_js_extra %}{% endblock %}
         {% endblock %}
     </body>
