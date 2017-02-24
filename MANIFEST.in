@@ -1,0 +1,2 @@
+include *.md *.txt
+recursive-include jasmin_theme *.ico *.png *.gif *.jpg *.svg *.eot *.ttf *.woff *.css *.js *.txt *.html *.json *.example

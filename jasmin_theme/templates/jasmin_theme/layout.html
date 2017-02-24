@@ -1,0 +1,166 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+        <meta name="description" content="{% block meta_description %}{% endblock %}">
+
+        <title>{% block head_title %}{% endblock %}</title>
+        <link rel="shortcut icon" href="{% static "jasmin_theme/img/favicon.ico" %}">
+
+        {% block blog_feeds %}
+        {% endblock %}
+
+        {% block stylesheets %}
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="{% static "jasmin_theme/css/bootstrap-theme.css" %}" />
+        <link rel="stylesheet" href="{% static "jasmin_theme/css/jasmin.css" %}" />
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        {% block stylesheets_extra %}{% endblock %}
+        {% endblock %}
+
+        {% block head_js %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="{% static "jasmin_theme/js/cookielaw.js" %}"></script>
+        {% block head_js_extra %}{% endblock %}
+        <!--[if lt IE 9]>
+            <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+            <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        {% endblock %}
+
+        {% block head_extra %}{% endblock %}
+    </head>
+
+    <body id="{% block body_id %}body{% endblock %}">
+        <div class="container-fluid">
+            {% block navbar_main %}
+            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed"
+                                data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
+                            <span class="sr-only">Toggle Navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        {% block branding %}
+                        <a class="navbar-brand" href="/">{% block site_name %}{% endblock %}</a>
+                        {% endblock %}
+                    </div>
+
+                    <div class="navbar-collapse collapse">
+                        {% block navigation %}{% endblock %}
+                    </div>
+                </div>
+            </nav>
+            {% endblock %}
+
+            <div id="content-main" class="container">
+                {% block cookielaw_banner %}
+                    {% if 'cookielaw_accepted' not in request.COOKIES %}
+                        <div class="alert alert-info text-center" id="cookielaw_banner">
+                            This website and other JASMIN sites use cookies.
+                            By continuing to use this website you are agreeing to our use of cookies.
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default"
+                                        onclick="javascript:Cookielaw.createCookie();$('#cookielaw_banner').slideUp();">OK</button>
+                                <button type="button" class="btn btn-default"
+                                        onclick="javascript:window.open('https://accounts.jasmin.ac.uk/account/privacy/')">Find out more</button>
+                            </div>
+                        </div>
+                        <script>
+                            if( Cookielaw.hasCookie() ) $('#cookielaw_banner').hide();
+                        </script>
+                    {% endif %}
+                {% endblock %}
+
+                {% block content_main %}
+                    {% block content_header %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="page-header">{% block page_title %}{% endblock %}</h1>
+                            {% block breadcrumbs %}{% endblock %}
+                        </div>
+                    </div>
+                    {% endblock %}
+
+                    {% block notifications %}
+                    {% if messages %}
+                        <div class="col-md-6 col-md-offset-3">
+                            {% for message in messages %}
+                                {% if 'success' in message.tags %}
+                                    <div class="alert alert-with-icon alert-success" role="alert">
+                                        <i class="fa fa-check-circle"></i> <span>{{ message }}</span>
+                                    </div>
+                                {% elif 'error' in message.tags %}
+                                    <div class="alert alert-with-icon alert-danger" role="alert">
+                                        <i class="fa fa-exclamation-circle"></i> <span>{{ message }}</span>
+                                    </div>
+                                {% elif 'warning' in message.tags %}
+                                    <div class="alert alert-with-icon alert-warning" role="alert">
+                                        <i class="fa fa-exclamation-triangle"></i> <span>{{ message }}</span>
+                                    </div>
+                                {% else %}
+                                    <div class="alert alert-with-icon alert-info" role="alert">
+                                        <i class="fa fa-info-circle"></i> <span>{{ message }}</span>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    {% endblock %}
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            {% block content %}{% endblock %}
+                        </div>
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+
+        {% block footer %}
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div id="nerc-logo" class="col-sm-6">
+                        <a href="http://www.nerc.ac.uk" title="NERC">
+                            <img src="{% static "jasmin_theme/img/nerc-long-logo-261.png" %}" title="NERC logo"
+                                 height="53" width="261" alt="NERC logo" />
+                        </a>
+                    </div>
+                    <div id="stfc-logo" class="col-sm-6">
+                        <a href="http://www.stfc.ac.uk" title="STFC">
+                            <img src="{% static "jasmin_theme/img/STFCMediumColourTrans.png" %}" title="STFC logo"
+                                 height="57" width="261" alt="STFC logo" />
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="site-info">
+                            Copyright &copy; 2016 <a href="http://www.stfc.ac.uk">STFC</a> |
+                            All Rights Reserved |
+                            <a href="{% block accessibility_link %}https://accounts.jasmin.ac.uk/account/accessibility/{% endblock %}" target="_blank">Accessibility</a> |
+                            <a href="{% block privacy_link %}https://accounts.jasmin.ac.uk/account/privacy/{% endblock %}" target="_blank">Privacy</a> |
+                            <a href="{% block support_link %}https://accounts.jasmin.ac.uk/account/support/{% endblock %}" target="_blank">Support</a> |
+                            <a href="{% block conditions_link %}https://accounts.jasmin.ac.uk/account/conditions/{% endblock %}" target="_blank">Terms and Conditions</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        {% endblock %}
+
+        {% block footer_js %}
+        <script src="{% static "jasmin_theme/js/invalid_controls.js" %}"></script>
+        {% block footer_js_extra %}{% endblock %}
+        {% endblock %}
+    </body>
+</html>

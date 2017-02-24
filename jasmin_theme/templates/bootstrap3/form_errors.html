@@ -1,0 +1,13 @@
+{# We want to use a similar style for non-field errors to that used for messages in the jasmin_theme layout #}
+{% if form.non_field_errors %}
+    <div class="row">
+        <div class="alert alert-with-icon alert-danger" role="alert">
+            <i class="fa fa-exclamation-circle"></i>
+            <div>
+                {% for error in form.non_field_errors %}
+                    {{ error }}{% if not forloop.last %}<br>{% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endif %}

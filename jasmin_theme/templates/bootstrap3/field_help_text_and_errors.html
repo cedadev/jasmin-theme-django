@@ -1,0 +1,6 @@
+{% if field.help_text %}
+    <span class="help-block">{{ field.help_text|safe }}</span>
+{% endif %}
+{% for error in field.errors %}
+    <span class="help-block error-block"><i class="fa fa-fw fa-exclamation-circle"></i> {{ error }}</span>
+{% endfor %}
