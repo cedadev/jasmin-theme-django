@@ -16,15 +16,14 @@
 
         {% block stylesheets %}
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="{% static "jasmin_theme/css/bootstrap-theme.css" %}" />
 
         {# extra customisations go here before jasmin theme styling #}
         {% block stylesheets_extra %}{% endblock %}
-        {% endblock %}
 
         <link rel="stylesheet" href="{% static "jasmin_theme/css/jasmin.css" %}" />
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+        {% endblock %}
 
         {% block head_js %}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
