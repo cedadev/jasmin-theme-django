@@ -16,13 +16,17 @@
 
         {% block stylesheets %}
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="{% static "jasmin_theme/css/bootstrap-theme.css" %}" />
 
-        {# extra customisations go here before jasmin theme styling #}
-        {% block stylesheets_extra %}{% endblock %}
+        {# some customisations go here before jasmin theme styling #}
+        {% block stylesheets_pre_extra %}{% endblock %}
+        {% endblock %}
 
         <link rel="stylesheet" href="{% static "jasmin_theme/css/jasmin.css" %}" />
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        {# most further customisations can go here, after jasmin theme styling #}
+        {% block stylesheets_extra %}{% endblock %}
         {% endblock %}
 
         {% block head_js %}
