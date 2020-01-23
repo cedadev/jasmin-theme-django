@@ -15,14 +15,14 @@
         {% endblock %}
 
         {% block stylesheets %}
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" />
         <link rel="stylesheet" href="{% static "jasmin_theme/css/bootstrap-theme.css" %}" />
 
         {# some customisations go here before jasmin theme styling #}
         {% block stylesheets_pre_extra %}{% endblock %}
 
         <link rel="stylesheet" href="{% static "jasmin_theme/css/jasmin.css" %}" />
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
         {# most further customisations can go here, after jasmin theme styling #}
         {% block stylesheets_extra %}{% endblock %}
@@ -30,8 +30,8 @@
         {% endblock %}
 
         {% block head_js %}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <script src="{% static "jasmin_theme/js/cookielaw.js" %}"></script>
         {% block head_js_extra %}{% endblock %}
         <!--[if lt IE 9]>
@@ -167,39 +167,8 @@
 
         {% block footer_js %}
         <script src="{% static "jasmin_theme/js/invalid_controls.js" %}"></script>
-        <script>!function(e,o,n){window.HSCW=o,window.HS=n,n.beacon=n.beacon||{};var t=n.beacon;t.userConfig={},t.readyQueue=[],t.config=function(e){this.userConfig=e},t.ready=function(e){this.readyQueue.push(e)},o.config={docs:{enabled:!0,baseUrl:"//jasmin-help.helpscoutdocs.com/"},contact:{enabled:!0,formId:"71e2f368-bd39-11e6-91aa-0a5fecc78a4d"}};var r=e.getElementsByTagName("script")[0],c=e.createElement("script");c.type="text/javascript",c.async=!0,c.src="https://djtflbt20bdde.cloudfront.net/",r.parentNode.insertBefore(c,r)}(document,window.HSCW||{},window.HS||{});</script>
-        <script>
-            HS.beacon.config({
-                color: '#ff6600',
-                topArticles: true,
-                icon: 'question',
-                translation: {
-                    searchLabel: 'Search JASMIN documentation',
-                    searchErrorLabel: 'There was a problem searching the Help pages. Visit: help.ceda.ac.uk or email support@ceda.ac.uk'
-                },
-                topics: [
-                    { val: 'jasmin-help', label: 'Help with JASMIN/CEMS'},
-                    { val: 'account-problem', label: 'Help with my account'},
-                    { val: 'bug-flag', label: 'Found a bug?'},
-                    { val: 'content-flag', label: 'Content on this page looks wrong'}
-                ],
-                attachment: true,
-                instructions:'Drop CEDA Support a message below and we\'ll try to help.'
-            });
-            HS.beacon.ready(function() {
-                {% block hs_beacon_suggestions %}
-                HS.beacon.suggest([]);
-                {% endblock %}
-                // If the user doesn't have the cookie, pop ourselves up, but set the cookie
-                if( document.cookie.match(/^(.*; ?)?hs_beacon_shown=[^;]+/) === null ) {
-                    // Open the Beacon as soon as it's ready
-                    this.open();
-                    setTimeout(this.close, 3000);
-                    // Set cookie that expires at end of session
-                    document.cookie = "hs_beacon_shown=1; expires=; path=/; ";
-                }
-            });
-        </script>
+        <script type="text/javascript">!function(e,t,n){function a(){var e=t.getElementsByTagName("script")[0],n=t.createElement("script");n.type="text/javascript",n.async=!0,n.src="https://beacon-v2.helpscout.net",e.parentNode.insertBefore(n,e)}if(e.Beacon=n=function(t,n,a){e.Beacon.readyQueue.push({method:t,options:n,data:a})},n.readyQueue=[],"complete"===t.readyState)return a();e.attachEvent?e.attachEvent("onload",a):e.addEventListener("load",a,!1)}(window,document,window.Beacon||function(){});</script>
+        <script type="text/javascript">window.Beacon('init', 'a108cc24-88df-4d59-9e84-17ba328fc105')</script>
         {% block footer_js_extra %}{% endblock %}
         {% endblock %}
     </body>
